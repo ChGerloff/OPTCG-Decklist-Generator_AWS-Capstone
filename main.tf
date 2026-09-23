@@ -1,7 +1,14 @@
+# Implementing Network Structure
+/* 
+Configures AZ's, kernel, vpc, internet gateway, route tables, subnets, security groups, and the EC2 instance hosting the web-server
+*/
+
+# Choose AZ
 data "aws_availability_zones" "available" {
   state = "available"
 }
 
+# Configure the operating system
 data "aws_ami" "amazon_linux" {
   most_recent = true
   owners      = ["amazon"]
@@ -12,6 +19,7 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
+# Define VPC's
 resource "aws_vpc" "dev_vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -22,6 +30,7 @@ resource "aws_vpc" "dev_vpc" {
   }
 }
 
+# Add Internet Gateway 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.dev_vpc.id
 
@@ -30,6 +39,7 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
+# Configure Route Tables
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.dev_vpc.id
 
