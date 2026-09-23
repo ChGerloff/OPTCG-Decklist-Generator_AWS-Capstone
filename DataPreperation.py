@@ -1,14 +1,9 @@
+# This script prepares the scrapes data for further usage
 import json
 import glob
 
 
-#LEADER_IDS = {
-#    "OP13-002", "OP05-002", "OP14-041", "OP07-019", "OP09-042", "OP13-079", "OP14-040", 
-#    "OP09-022",  "EB02-010", "OP09-061", "OP11-040", "OP14-020", "OP06-080", "OP14-080", "OP03-040", "OP11-041", "OP12-001",
-#    "OP13-003", "OP13-004", "ST13-001", "OP12-041", "ST12-001", "OP09-001", "ST05-001", "OP09-081", "OP06-022", "OP01-001", 
-#    "OP12-020"
-#}
-
+# List of Leaders (id's)
 LEADER_IDS = {
     "OP12-061", "OP05-022", "P-076", "ST08-001", "OP08-021", "OP03-076", 
     "OP12-001", "OP01-006", "OP05-002", "OP14-060", "ST10-001", "OP10-022",
@@ -54,6 +49,7 @@ def normalize_deck(deck):
 
 
 all_entries = []
+
 
 for file in glob.glob("decks/*.json"):
     with open(file, "r", encoding="utf-8") as f:
