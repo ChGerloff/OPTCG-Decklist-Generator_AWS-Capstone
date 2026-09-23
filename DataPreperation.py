@@ -90,37 +90,8 @@ print(leaders)
 invalid = [e for e in all_entries if e["leader"] not in LEADER_IDS]
 print("Invalid leaders:", len(invalid))
 
-
+# Filtering out any leaders with too few deack list registred
 from collections import Counter
 
 # Count decklists per leader
 leader_counts = Counter(e["leader"] for e in all_entries)
-
-# Leaders with fewer than 500 decklists
-below_500 = [leader for leader, count in leader_counts.items() if count < 500]
-
-# Leaders with 500 or more decklists
-above_500 = [leader for leader, count in leader_counts.items() if count >= 500]
-
-print("Leaders below 500 decklists:", len(below_500))
-print("Leaders above or equal 500 decklists:", len(above_500))
-
-
-print("\nLeaders above or equal 500:")
-for leader in sorted(above_500):
-    print(leader)
-
-
-from collections import Counter
-
-leader_counts = Counter(e["leader"] for e in all_entries)
-
-# Leaders with 500 or more decklists
-above_400 = {leader: count for leader, count in leader_counts.items() if count >= 400}
-
-print("Leaders with 500+ decklists and their counts:")
-for leader, count in sorted(above_400.items(), key=lambda x: x[1], reverse=True):
-    print(f"{leader}: {count}")
-
-with open("Above400/above400.json", "w", encoding="utf-8") as f:
-    json.dump(above_400, f, indent=4, ensure_ascii=False)
